@@ -11,6 +11,10 @@ const items = [
   {
     title:'What is Angular',
     content: 'Angular is a front-end framework'
+  },
+  {
+    title:'What is Node.js',
+    content: 'Node is a JS runtime that builds backend web services'
   }
 ]
 
