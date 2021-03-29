@@ -3,25 +3,27 @@ import 'semantic-ui-css/semantic.min.css';
 
 const Accordion = ({items}) => {
 
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(-1)
     
     const onTitleClick = (index) => {
-        setActiveIndex(index);
-        console.log(activeIndex)
+        index === activeIndex ? setActiveIndex(-1): setActiveIndex(index)
+        //setActiveIndex(index);
+        //console.log(activeIndex)
     }
 
     const renderItems = () => items.map(
         (item, index) => {
+            const active = index === activeIndex ? 'active': ''
             return (
                 <React.Fragment key = {item.title}>
                     <div 
-                        className = 'title active'
+                        className = {`title ${active}`}
                         onClick = {() =>  onTitleClick(index)}
                     >
                         <i className = 'dropdown icon'></i>
                         {item.title}
                     </div>
-                    <div className = 'content active'>
+                    <div className = {`content ${active}`}>
                         <p>{item.content}</p>
                     </div>
                 </React.Fragment>
@@ -44,23 +46,25 @@ class AccordComp extends React.Component{
     }
 
     onTitleClick = (index) => {
-        console.log(index)
+        this.setState({activeIndex: index});
+        console.log(this.state.activeIndex)
     }
 
     render(){
         return this.props.items.map(
             (item, index) => {
+                let active = index === this.state.activeIndex ? 'active':'';
                 return (
                     <React.Fragment>
                         <div 
-                            className = 'title active'
+                            className = {`title ${active}`}
                             onClick = { () => this.onTitleClick(index) }
                         >
                             <i className = 'dropdown icon' />
                             {item.title}
                         </div>
                         <div
-                            className = 'content active'
+                            className = {`content ${active}`}
                         >
                             <p>{item.content}</p>
                         </div>
