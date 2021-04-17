@@ -1,8 +1,6 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useState} from 'react';
 import Convert from './Convert';
 import DropDown from './Dropdown';
-
-
 
 const options = [
     {
@@ -19,13 +17,17 @@ const options = [
     }
 ]
 
+/**
+ * The issue of Translate component, 400 bad request, probably something wrong with the api request
+ */
 const Translate = () => {
     const [language, setLanguage] = useState(options[0]);
-    const [text, setText] = useState('');
+    const [text, setText] = useState('hello');
+    
     return (
         <div>
-            <label>Enter text</label>
-            <input value = {text} onChange = {setText} />
+            <label>Enter text you want to translate: </label>
+            <input type = 'text' value = {text} onChange = {event => {setText(event.target.value)}} />
             <DropDown 
                 label = 'Select a language'
                 options = {options}
